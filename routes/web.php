@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\QueueController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+//Route::resource('/sqs/queue', \App\Http\Controllers\QueueController::class);
+Route::get('/sqs/queue', '\App\Http\Controllers\QueueController@queue');
+Route::resource('/sqs', \App\Http\Controllers\QueueController::class);
+
 
 Route::get('/', function () {
     return view('welcome');
