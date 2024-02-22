@@ -13,9 +13,10 @@ use App\Http\Controllers\QueueController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-//Route::resource('/sqs/queue', \App\Http\Controllers\QueueController::class);
+
+require __DIR__.'/auth.php';
 Route::get('/sqs/queue', '\App\Http\Controllers\QueueController@queue');
-Route::resource('/sqs', \App\Http\Controllers\QueueController::class);
+Route::resource('/sqs', QueueController::class);
 
 
 Route::get('/', function () {
