@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CacheController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,3 +26,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::middleware('auth:sanctum')->post('/upload', '\App\Http\Controllers\UploadController@store');
 Route::post('register', '\App\Http\Controllers\Auth\RegisteredUserController@store');
+Route::resource('/cache', CacheController::class);

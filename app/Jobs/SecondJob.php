@@ -11,23 +11,16 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
-class SendEmail implements ShouldQueue
+class SecondJob implements ShouldQueue
 {
     use Batchable, Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-
-    public string $email;
-
-    public function __construct(string $email)
-    {
-        $this->email = $email;
-    }
 
     public function handle()
     {
         if ($this->batch()->canceled()) {
             return;
         }
-        Log::info($this->email);
+        Log::info('hendler2');
       //  Mail::to($this->email)->send(new \App\Mail\Welcome());
     }
 }

@@ -12,6 +12,15 @@ RUN apt-get install -y libicu-dev \
 && docker-php-ext-configure intl \
 && docker-php-ext-install intl
 
+RUN docker-php-ext-configure pcntl --enable-pcntl \
+  && docker-php-ext-install pcntl;
+RUN apt-get install -y supervisor
+COPY laravel-worker.conf /etc/supervisor/conf.d/
+RUN mkdir -p /home/test
+RUN chmod -R 777 /home/test
+COPY start_supervisor.sh /home/test
+
+
 # pcov
 RUN pecl install pcov && docker-php-ext-enable pcov
 
@@ -43,3 +52,5 @@ RUN git clone https://github.com/seebi/dircolors-solarized
 
 EXPOSE 5173
 WORKDIR /var/www
+RUN mkdir -p /var/www/supervisor/
+RUN chmod +x /home/test/start_supervisor.sh
