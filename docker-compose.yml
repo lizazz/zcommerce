@@ -1,5 +1,4 @@
 version: '3'
-name: laravel-project
 
 services:
 
@@ -99,18 +98,15 @@ services:
         - 8025:8025
         - 1025:1025
     redis:
-        image: 'redis:alpine'
+        image: "redis:alpine"
         ports:
-            - '${FORWARD_REDIS_PORT:-6379}:6379'
+            - "${FORWARD_REDIS_PORT:-6379}:6379"
         volumes:
-            - 'sail-redis:/data'
+            - "sail-redis:/data"
         networks:
             - sail
         healthcheck:
-            test:
-                - CMD
-                - redis-cli
-                - ping
+            test: ["CMD", "redis-cli ping"]
             retries: 3
             timeout: 5s
 networks:
